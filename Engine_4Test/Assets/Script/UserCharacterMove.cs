@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class UserCharacterMove : MonoBehaviour
 {
-    //캐릭터 직선 이동 속도 (걷기)
-    public float walkMoveSpd = 2.0f;
-
-    //캐릭터 직선 이동 속도 (달리기)
-    public float runMoveSpd = 3.5f;
-
     //캐릭터 회전 이동 속도 
     public float rotateMoveSpd = 100.0f;
 
@@ -31,12 +25,6 @@ public class UserCharacterMove : MonoBehaviour
     //캐릭터 CollisionFlags 초기값 설정
     private CollisionFlags collisionFlagsCharacter = CollisionFlags.None;
 
-    //캐릭터 중력값
-    private float gravity = 9.8f;
-
-    //캐릭터 중력 속도 값
-    private float verticalSpd = 0f;
-
     //캐릭터 멈춤 변수 플래그
     private bool stopMove = false;
 
@@ -54,9 +42,23 @@ public class UserCharacterMove : MonoBehaviour
     [Header("캐릭터상태")]
     public PlayerState playerState = PlayerState.None;
 
+    private Transform _transform;
+    private bool _isJumping;
+    private float _posY;
+    private float _gravity;
+    private float _jumpPower;
+    private float _jumpTime;
+
     // Start is called before the first frame update
     void Start()
     {
+        _transform = transform;
+        _isJumping = false;
+        _posY = transform.position.y;
+        _gravity = 15f;
+        _jumpPower = 9f;
+        _jumpTime = 0.0f;
+
         //CharacterController 캐싱
         controllerCharacter = GetComponent<CharacterController>();
 
@@ -90,8 +92,8 @@ public class UserCharacterMove : MonoBehaviour
         //플레이어 상태 조건에 맞추어 애니메이션 재생 
         ckAnimationState();
 
-        //중력 적용
-        setGravity();
+        //점프
+        Jump();
     }
 
     /// <summary>
@@ -114,24 +116,11 @@ public class UserCharacterMove : MonoBehaviour
         //키입력 
         float horizontal = Input.GetAxis("Horizontal");
 
-        //케릭터가 이동하고자 하는 방향 
-        Vector3 targetDirection = horizontal * right;
-
-        //현재 이동하는 방향에서 원하는 방향으로 회전 
-        vecMoveDirection = Vector3.RotateTowards(vecMoveDirection, Vector3.forward, 0, 1000.0f);
-
-        //캐릭터 이동 속도
-        float spd = runMoveSpd;
-
-        //중력이동 
-        Vector3 gravity = new Vector3(0f, verticalSpd, 0f);
-
-        // 프레임 이동 양
-        Vector3 moveAmount = (transform.position * horizontal * spd * Time.deltaTime) + gravity;
-
-        collisionFlagsCharacter = controllerCharacter.Move(moveAmount);
-
-
+        //이동 + 이동 제한
+        if (transform.position.x >= 443) transform.position += new Vector3(-0.1f, 0, 0);
+        else if (transform.position.x <= 424) transform.position += new Vector3(0.1f, 0, 0);
+        transform.position += new Vector3(horizontal / 10, 0, 0);
+        
     }
 
 
@@ -253,18 +242,25 @@ public class UserCharacterMove : MonoBehaviour
         animationclip.AddEvent(newAnimationEvent);
     }
 
-    /// <summary>
-    ///  캐릭터 중력 설정
-    /// </summary>
-    void setGravity()
+    void Jump()
     {
-        if ((collisionFlagsCharacter & CollisionFlags.CollidedBelow) != 0)
+        if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
-            verticalSpd = 0f;
+            _isJumping = true;
+            _posY = _transform.position.y;
         }
-        else
+        if (_isJumping)
         {
-            verticalSpd -= gravity * Time.deltaTime;
+            float height = (_jumpTime * _jumpTime * (-_gravity) / 2) + (_jumpTime * _jumpPower);
+            _transform.position = new Vector3(_transform.position.x, _posY + height, _transform.position.z);
+            _jumpTime += Time.deltaTime;
+            if (height < 0.0f)
+            {
+                _isJumping = false;
+                _jumpTime = 0.0f;
+                _transform.position = new Vector3(_transform.position.x, _posY, _transform.position.z);
+            }
         }
+
     }
 }

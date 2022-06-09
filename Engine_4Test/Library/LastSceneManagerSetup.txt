@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/sample_scene/TT_RTS_demo_sample_scene.unity
+- path: Assets/Scenes/StartScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
