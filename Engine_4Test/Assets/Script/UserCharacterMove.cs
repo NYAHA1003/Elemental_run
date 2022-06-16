@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UserCharacterMove : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class UserCharacterMove : MonoBehaviour
 
     //CharacterController 캐싱 준비
     private CharacterController controllerCharacter = null;
+    
+    //Rigidbody 캐싱 준비
+    private Rigidbody rigidBody = null;
 
     //캐릭터 CollisionFlags 초기값 설정
     private CollisionFlags collisionFlagsCharacter = CollisionFlags.None;
@@ -29,35 +33,33 @@ public class UserCharacterMove : MonoBehaviour
     private bool stopMove = false;
 
     [Header("애니메이션 속성")]
-    public AnimationClip animationClipIdle = null;
     public AnimationClip animationClipRun = null;
+    public AnimationClip animationClipSkill = null;
 
     //컴포넌트도 필요합니다 
     private Animation animationPlayer = null;
 
 
     //캐릭터 상태  캐릭터 상태에 따라 animation을 표현
-    public enum PlayerState { None, Idle, Run }
+    public enum PlayerState { None, Run, Jump, Item }
 
     [Header("캐릭터상태")]
     public PlayerState playerState = PlayerState.None;
 
     private Transform _transform;
-    private bool _isJumping;
+    private bool _isJumping = false;
     private float _posY;
-    private float _gravity;
-    private float _jumpPower;
-    private float _jumpTime;
+    private float _gravity = 15f;   
+    private float _jumpPower = 9f;
+    private float _jumpTime = 0.0f;
+    public float jumpSpeed;
+    public float jumpDuration;
 
     // Start is called before the first frame update
     void Start()
     {
         _transform = transform;
-        _isJumping = false;
         _posY = transform.position.y;
-        _gravity = 15f;
-        _jumpPower = 9f;
-        _jumpTime = 0.0f;
 
         //CharacterController 캐싱
         controllerCharacter = GetComponent<CharacterController>();
@@ -70,35 +72,40 @@ public class UserCharacterMove : MonoBehaviour
         animationPlayer.Stop();
 
         //초기 애니메이션을 설정 Enum
-        playerState = PlayerState.Idle;
+        playerState = PlayerState.Run;
 
         //animation WrapMode : 재생 모드 설정 
-        animationPlayer[animationClipIdle.name].wrapMode = WrapMode.Loop;
         animationPlayer[animationClipRun.name].wrapMode = WrapMode.Loop;
+        animationPlayer[animationClipSkill.name].wrapMode = WrapMode.Once;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //캐릭터 이동 
-        Move();
-        // Debug.Log(getNowVelocityVal());
-        //캐릭터 방향 변경 
-        vecDirectionChangeBody();
+            //캐릭터 이동 
+            Move();
 
-        //현재 상태에 맞추어서 애니메이션을 재생시켜줍니다
-        AnimationClipCtrl();
+            //현재 상태에 맞추어서 애니메이션을 재생시켜줍니다
+            AnimationClipCtrl();
 
-        //플레이어 상태 조건에 맞추어 애니메이션 재생 
-        ckAnimationState();
-
-        //점프
-        Jump();
+            //점프
+            Jump();
     }
 
-    /// <summary>
-    /// 이동함수 입니다 캐릭터
-    /// </summary>
+    private void OnGUI()
+    {
+        var labelStyle = new GUIStyle();
+        labelStyle.fontSize = 50;
+        labelStyle.normal.textColor = Color.black;
+
+        GUILayout.Label("플레이어 체력 : " + PlayerManager.Instance.hp.ToString(), labelStyle);
+
+        //현재 캐릭터 방향 + 크기
+        GUILayout.Label("보유 아이템 : " + PlayerManager.Instance.currentItem.ToString(), labelStyle);
+
+        GUILayout.Label("현재 색 : " + UsingItemRay.rayColor, labelStyle);
+    }
+
     void Move()
     {
         if (stopMove == true)
@@ -117,10 +124,9 @@ public class UserCharacterMove : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         //이동 + 이동 제한
-        if (transform.position.x >= 443) transform.position += new Vector3(-0.1f, 0, 0);
-        else if (transform.position.x <= 424) transform.position += new Vector3(0.1f, 0, 0);
+        if (transform.position.x >= 442) transform.position += new Vector3(-0.1f, 0, 0);
+        else if (transform.position.x <= 428) transform.position += new Vector3(0.1f, 0, 0);
         transform.position += new Vector3(horizontal / 10, 0, 0);
-        
     }
 
 
@@ -150,24 +156,6 @@ public class UserCharacterMove : MonoBehaviour
         return vecNowVelocity.magnitude;
     }
 
-    /// <summary>
-    /// 캐릭터 몸통 벡터 방향 함수
-    /// </summary>
-    void vecDirectionChangeBody()
-    {
-        //캐릭터 이동 시
-        if (getNowVelocityVal() > 0.0f)
-        {
-            //내 몸통  바라봐야 하는 곳은 어디?
-            Vector3 newForward = controllerCharacter.velocity;
-            newForward.y = 0.0f;
-
-            //내 캐릭터 전면 설정 
-            transform.forward = Vector3.Lerp(transform.forward, newForward, rotateBodySpd * Time.deltaTime);
-
-        }
-    }
-
 
     /// <summary>
     ///  애니메이션 재생시켜주는 함수
@@ -189,40 +177,19 @@ public class UserCharacterMove : MonoBehaviour
     {
         switch (playerState)
         {
-            case PlayerState.Idle:
-                playAnimationByClip(animationClipIdle);
-                break;
             case PlayerState.Run:
                 playAnimationByClip(animationClipRun);
                 break;
-        }
-    }
-
-    /// <summary>
-    ///  현재 상태를 체크해주는 함수
-    /// </summary>
-    void ckAnimationState()
-    {
-        //현재 속도 값
-        float nowSpd = getNowVelocityVal();
-
-        //현재 플레이어 상태
-        switch (playerState)
-        {
-            case PlayerState.Idle:
-                if (nowSpd > 0.0f)
-                {
-                    playerState = PlayerState.Run;
-                }
+            case PlayerState.Jump:
+                animationPlayer.Stop();
                 break;
-            case PlayerState.Run:
-                if (nowSpd < 0.01f)
-                {
-                    playerState = PlayerState.Idle;
-                }
+            case PlayerState.Item:
+                playAnimationByClip(animationClipSkill);
                 break;
         }
     }
+
+
 
     /// <summary>
     /// 애니매이션 클립 재생이 끝날 때쯤 애니매이션 이벤트 함수를 호출
@@ -247,6 +214,7 @@ public class UserCharacterMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
             _isJumping = true;
+            playerState = PlayerState.Jump;
             _posY = _transform.position.y;
         }
         if (_isJumping)
@@ -261,6 +229,6 @@ public class UserCharacterMove : MonoBehaviour
                 _transform.position = new Vector3(_transform.position.x, _posY, _transform.position.z);
             }
         }
-
+        playerState = PlayerState.Run;
     }
 }
