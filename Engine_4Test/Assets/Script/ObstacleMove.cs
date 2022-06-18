@@ -6,6 +6,7 @@ public class ObstacleMove : MonoBehaviour
 {
     private Rigidbody rigidBody;
     public int obsNum = 0;
+    private float delay;
 
     public void True()
     {
@@ -19,6 +20,8 @@ public class ObstacleMove : MonoBehaviour
 
     void Update()
     {
+        delay = Mathf.Clamp(delay, 0, 5);
+        delay = Random.Range(0f, 5f);
         Move();
     }
 
@@ -29,8 +32,9 @@ public class ObstacleMove : MonoBehaviour
         if (transform.position.z <= -15)
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 100);
+            GameManager.instance.score += 100;
             gameObject.SetActive(false);
-            Invoke("True", 3f);
+            Invoke("True", delay);
         }
     }
 
@@ -41,7 +45,7 @@ public class ObstacleMove : MonoBehaviour
             Debug.Log("Ãæµ¹");
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 100);
             gameObject.SetActive(false);
-            Invoke("True", 3f);
+            Invoke("True", delay);
         }
         else return;
     }

@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
 
     public int hp = 3;
     public int currentItem = 0;
-    private float chargeGauge = 3f;
+    private float chargeGauge;
 
     void Start()
     {
@@ -57,6 +57,7 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator GetItem()
     {
+        chargeGauge = GameManager.instance.playerGauge;
         while(true)
         {
             currentItem = Mathf.Clamp(currentItem, 0, 2);
@@ -72,7 +73,11 @@ public class PlayerManager : MonoBehaviour
             hp--;
             if(hp <= 0)
             {
+                if (GameManager.instance.maxScore < GameManager.instance.score) GameManager.instance.maxScore = GameManager.instance.score;
+                GameManager.instance.playerGold += GameManager.instance.score / 100;
+                GameManager.instance.score = 0;
                 SceneManager.LoadScene(2);
+                hp = 3;
             }
             collision.gameObject.BroadcastMessage("HitPlayer", 0, SendMessageOptions.RequireReceiver);
         }

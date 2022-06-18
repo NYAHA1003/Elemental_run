@@ -5,29 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UserCharacterMove : MonoBehaviour
 {
-    //캐릭터 회전 이동 속도 
-    public float rotateMoveSpd = 100.0f;
-
-    //캐릭터 회전 방향으로 몸을 돌리는 속도
-    public float rotateBodySpd = 2.0f;
-
-    //캐릭터 이동 속도 증가 값
-    public float moveChageSpd = 0.1f;
-
-    //현재 캐릭터 이동 백터 값 
-    private Vector3 vecNowVelocity = Vector3.zero;
-
-    //현재 캐릭터 이동 방향 벡터 
-    private Vector3 vecMoveDirection = Vector3.zero;
-
     //CharacterController 캐싱 준비
     private CharacterController controllerCharacter = null;
-    
-    //Rigidbody 캐싱 준비
-    private Rigidbody rigidBody = null;
-
-    //캐릭터 CollisionFlags 초기값 설정
-    private CollisionFlags collisionFlagsCharacter = CollisionFlags.None;
 
     //캐릭터 멈춤 변수 플래그
     private bool stopMove = false;
@@ -46,11 +25,13 @@ public class UserCharacterMove : MonoBehaviour
     [Header("캐릭터상태")]
     public PlayerState playerState = PlayerState.None;
 
+    public float speed;
+
     private Transform _transform;
     private bool _isJumping = false;
     private float _posY;
     private float _gravity = 15f;   
-    private float _jumpPower = 9f;
+    private float _jumpPower = 11.5f;
     private float _jumpTime = 0.0f;
     public float jumpSpeed;
     public float jumpDuration;
@@ -99,15 +80,16 @@ public class UserCharacterMove : MonoBehaviour
         labelStyle.normal.textColor = Color.black;
 
         GUILayout.Label("플레이어 체력 : " + PlayerManager.Instance.hp.ToString(), labelStyle);
-
-        //현재 캐릭터 방향 + 크기
         GUILayout.Label("보유 아이템 : " + PlayerManager.Instance.currentItem.ToString(), labelStyle);
-
         GUILayout.Label("현재 색 : " + UsingItemRay.rayColor, labelStyle);
+        GUILayout.Label("현재 점수 : " + GameManager.instance.score, labelStyle);
+        GUILayout.Label("최대 점수 : " + GameManager.instance.maxScore, labelStyle);
+        GUILayout.Label("보유 돈 : " + GameManager.instance.playerGold, labelStyle);
     }
 
     void Move()
     {
+        speed = GameManager.instance.playerSpeed;
         if (stopMove == true)
         {
             return;
@@ -124,39 +106,10 @@ public class UserCharacterMove : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         //이동 + 이동 제한
-        if (transform.position.x >= 442) transform.position += new Vector3(-0.1f, 0, 0);
-        else if (transform.position.x <= 428) transform.position += new Vector3(0.1f, 0, 0);
-        transform.position += new Vector3(horizontal / 10, 0, 0);
+        if (transform.position.x >= 442) transform.position += new Vector3(-speed, 0, 0);
+        else if (transform.position.x <= 428) transform.position += new Vector3(speed, 0, 0);
+        transform.position += new Vector3(horizontal * speed, 0, 0);
     }
-
-
-    /// <summary>
-    /// 현재 내 케릭터 이동 속도 가져오는 함  
-    /// </summary>
-    /// <returns>float</returns>
-    float getNowVelocityVal()
-    {
-        //현재 캐릭터가 멈춰 있다면 
-        if (controllerCharacter.velocity == Vector3.zero)
-        {
-            //반환 속도 값은 0
-            vecNowVelocity = Vector3.zero;
-        }
-        else
-        {
-
-            //반환 속도 값은 현재 /
-            Vector3 retVelocity = controllerCharacter.velocity;
-            retVelocity.y = 0.0f;
-
-            vecNowVelocity = Vector3.Lerp(vecNowVelocity, retVelocity, moveChageSpd * Time.fixedDeltaTime);
-
-        }
-        //거리 크기
-        return vecNowVelocity.magnitude;
-    }
-
-
     /// <summary>
     ///  애니메이션 재생시켜주는 함수
     /// </summary>

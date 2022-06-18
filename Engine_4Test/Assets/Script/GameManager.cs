@@ -1,55 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance
+    private static GameManager Instance;
+
+    public int playerGold;
+    public int maxScore;
+    public float playerSpeed;
+    public int plusScore;
+    public float playerGauge;
+    public int score;
+
+    private void Awake()
+    {
+        if(null == Instance)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        string path = Path.Combine(Application.dataPath, "database.json");
+    }
+    public static GameManager instance
     {
         get
         {
-            if (instance == null)
+            if(null == Instance)
             {
-                var obj = FindObjectOfType<GameManager>();
-                if (obj != null)
-                {
-                    instance = obj;
-                }
-                else
-                {
-                    var newSingleton = new GameObject("Singleton Class").AddComponent<GameManager>();
-                    instance = newSingleton;
-                }
+                return null;
             }
-            return instance;
-        }
-        private set
-        {
-            instance = value;
+            return Instance;
         }
     }
-    private void Awake()
-    {
-        var objs = FindObjectsOfType<GameManager>();
-        if (objs.Length != 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }
+
