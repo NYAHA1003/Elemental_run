@@ -22,7 +22,7 @@ public class UiManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
-            spdCostText.text = $"{GameManager.instance.playerSpeed * 1000} gold";
+            spdCostText.text = $"{(int)(GameManager.instance.playerSpeed * 1000)} gold";
             scoreCostText.text = $"{GameManager.instance.plusScore * 10} gold";
             gaugeCostText.text = $"{(int)(1000 / GameManager.instance.playerGauge)} gold";
         }
@@ -49,9 +49,10 @@ public class UiManager : MonoBehaviour
 
     public void UpgradeSpd()
     {
-        if (GameManager.instance.playerSpeed * 1000 > GameManager.instance.playerGold)
+        if ((int)(GameManager.instance.playerSpeed * 1000) < GameManager.instance.playerGold)
         {
             GameManager.instance.playerSpeed += 0.03f;
+            GameManager.instance.playerGold -= (int)(GameManager.instance.playerSpeed * 1000);
         }
         else
         {
@@ -60,9 +61,10 @@ public class UiManager : MonoBehaviour
     }
     public void UpgradeScore()
     {
-        if (GameManager.instance.plusScore * 10 > GameManager.instance.playerGold)
+        if (GameManager.instance.plusScore * 10 < GameManager.instance.playerGold)
         {
-            GameManager.instance.playerSpeed += 0.03f;
+            GameManager.instance.plusScore += 10;
+            GameManager.instance.playerGold -= GameManager.instance.plusScore * 10;
         }
         else
         {
@@ -71,9 +73,10 @@ public class UiManager : MonoBehaviour
     }
     public void UpgradeGauge()
     {
-        if ((int)(1000 / GameManager.instance.playerGauge) > GameManager.instance.playerGold)
+        if ((int)(1000 / GameManager.instance.playerGauge) < GameManager.instance.playerGold)
         {
-            GameManager.instance.playerSpeed += 0.03f;
+            GameManager.instance.playerGauge -= 0.1f;
+            GameManager.instance.playerGold -= (int)(1000 / GameManager.instance.playerGauge);
         }
         else
         {

@@ -32,7 +32,7 @@ public class ObstacleMove : MonoBehaviour
         if (transform.position.z <= -15)
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 100);
-            GameManager.instance.score += 100;
+            GameManager.instance.score += GameManager.instance.plusScore;
             gameObject.SetActive(false);
             Invoke("True", delay);
         }
@@ -44,6 +44,7 @@ public class ObstacleMove : MonoBehaviour
         {
             Debug.Log("Ãæµ¹");
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 100);
+            GameManager.instance.score += GameManager.instance.plusScore;
             gameObject.SetActive(false);
             Invoke("True", delay);
         }

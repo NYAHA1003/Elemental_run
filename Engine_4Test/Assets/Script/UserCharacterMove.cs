@@ -109,6 +109,7 @@ public class UserCharacterMove : MonoBehaviour
         if (transform.position.x >= 442) transform.position += new Vector3(-speed, 0, 0);
         else if (transform.position.x <= 428) transform.position += new Vector3(speed, 0, 0);
         transform.position += new Vector3(horizontal * speed, 0, 0);
+        transform.rotation = Quaternion.Euler(new Vector3(0, horizontal * 35, 0));
     }
     /// <summary>
     ///  애니메이션 재생시켜주는 함수
