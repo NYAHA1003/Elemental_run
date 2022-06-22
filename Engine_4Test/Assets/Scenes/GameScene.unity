@@ -140,6 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 0
 --- !u!54 &201766021
 Rigidbody:
@@ -186,6 +191,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 1
 --- !u!54 &246265596
 Rigidbody:
@@ -396,6 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 0
 --- !u!54 &1049381003
 Rigidbody:
@@ -442,6 +457,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 2
 --- !u!54 &1340363671
 Rigidbody:
@@ -564,6 +584,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 3
 --- !u!54 &1352733979
 Rigidbody:
@@ -598,6 +623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2575183b79d673a45830eeaa463fe36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsMaterial:
+  - {fileID: 2100000, guid: f23088e3b64ae6f45b1c96733099d86a, type: 2}
+  - {fileID: 2100000, guid: 69f439702b04b194a95088370ab9c367, type: 2}
+  - {fileID: 2100000, guid: a8c06e779bef9f240a0dc5fae5d2e081, type: 2}
+  - {fileID: 2100000, guid: 6217984721492ca4f936b52a68c3229c, type: 2}
   obsNum: 1
 --- !u!54 &1482318461
 Rigidbody:

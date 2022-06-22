@@ -3182,30 +3182,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2034884678, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: speed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034884678, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: jumpSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034884678, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: jumpDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034884678, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: animationClipSkill
-      value: 
-      objectReference: {fileID: 7400000, guid: ed734e82275142a40adea85217d0b681, type: 2}
-    - target: {fileID: 2034884679, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: m_Animations.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034884679, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
-      propertyPath: m_Animations.Array.data[1]
-      value: 
-      objectReference: {fileID: 7400000, guid: ed734e82275142a40adea85217d0b681, type: 2}
     - target: {fileID: 4455843949792832137, guid: bfd5d22b2ad24c04a832a19dbe7665ec, type: 3}
       propertyPath: m_Name
       value: TT_RTS_Demo_Character
