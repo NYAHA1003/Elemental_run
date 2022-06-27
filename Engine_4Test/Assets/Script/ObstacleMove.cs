@@ -20,15 +20,15 @@ public class ObstacleMove : MonoBehaviour
 
     void Start()
     {
-        moveSpd = Mathf.Clamp(moveSpd, -125, -25);
+        moveSpd = Mathf.Clamp(moveSpd, -125, -10);
         rigidBody = GetComponent<Rigidbody>();
         meshRen = GetComponent<MeshRenderer>();
     }
 
     void Update()
     {
-        delay = Mathf.Clamp(delay, 0, 4);
-        delay = Random.Range(0f, 4f);
+        delay = Mathf.Clamp(delay, 0,5);
+        delay = Random.Range(0f, 5f);
         Move();
     }
 

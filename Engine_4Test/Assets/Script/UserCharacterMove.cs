@@ -76,10 +76,11 @@ public class UserCharacterMove : MonoBehaviour
     private void OnGUI()
     {
         var labelStyle = new GUIStyle();
-        labelStyle.fontSize = 50;
+        labelStyle.fontSize = 40;
         labelStyle.normal.textColor = Color.black;
 
         GUILayout.Label("플레이어 체력 : " + PlayerManager.Instance.hp.ToString(), labelStyle);
+        GUILayout.Label("플레이어 속도 : " + GameManager.instance.playerSpeed.ToString(), labelStyle);
         GUILayout.Label("보유 아이템 : " + PlayerManager.Instance.currentItem.ToString(), labelStyle);
         GUILayout.Label("현재 색 : " + UsingItemRay.rayColor, labelStyle);
         GUILayout.Label("현재 점수 : " + GameManager.instance.score, labelStyle);
@@ -90,18 +91,7 @@ public class UserCharacterMove : MonoBehaviour
     void Move()
     {
         speed = GameManager.instance.playerSpeed;
-        if (stopMove == true)
-        {
-            return;
-        }
-        Transform CameraTransform = Camera.main.transform;
-        //메인 카메라가 바라보는 방향이 월드상에 어떤 방향인가.
-        Vector3 forward = CameraTransform.TransformDirection(Vector3.forward);
-        forward.y = 0.0f;
-
-        //forward.z, forward.x
-        Vector3 right = new Vector3(forward.z, 0.0f, -forward.x);
-
+        if (stopMove == true) return;
         //키입력 
         float horizontal = Input.GetAxis("Horizontal");
 
@@ -184,5 +174,17 @@ public class UserCharacterMove : MonoBehaviour
             }
         }
         playerState = PlayerState.Run;
+    }
+
+    public void PlayerDown()
+    {
+        stopMove = true;
+        Invoke("CopyDie", 2f);
+    }
+
+    public void CopyDie()
+    {
+        PlayerManager.Die();
+        stopMove = false;
     }
 }

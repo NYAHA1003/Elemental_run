@@ -207,8 +207,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32.44
+  m_fontSizeBase: 32.44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -290,6 +290,7 @@ MonoBehaviour:
   spdCostText: {fileID: 0}
   scoreCostText: {fileID: 0}
   gaugeCostText: {fileID: 0}
+  dangerPanel: {fileID: 0}
 --- !u!4 &1064578929
 Transform:
   m_ObjectHideFlags: 0
@@ -904,8 +905,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32.44
+  m_fontSizeBase: 32.44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

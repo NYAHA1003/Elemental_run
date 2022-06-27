@@ -7,6 +7,6 @@ public class DotweenMove : MonoBehaviour
 {
     void Start()
     {
-        transform.DOMoveY(1.5f, 4f).SetLoops(-1,LoopType.Yoyo);
+        transform.DOMoveY(1.5f, 2.5f).SetLoops(-1,LoopType.Yoyo);
     }
 }

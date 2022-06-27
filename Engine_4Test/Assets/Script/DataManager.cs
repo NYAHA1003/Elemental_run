@@ -37,7 +37,6 @@ public class DataManager : MonoBehaviour
             saveData = JsonUtility.FromJson<SaveData>(loadJson);
             if (saveData != null)
             {
-                Debug.Log("saveData != null");
                 GameManager.instance.playerGold = saveData.gold;
                 GameManager.instance.maxScore = saveData.maxS;
                 GameManager.instance.playerSpeed = saveData.speed;

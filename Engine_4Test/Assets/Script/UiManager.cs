@@ -12,6 +12,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI spdCostText;
     public TextMeshProUGUI scoreCostText;
     public TextMeshProUGUI gaugeCostText;
+    public GameObject dangerPanel;
 
     void Start()
     {
@@ -47,40 +48,48 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void DangerOff()
+    {
+        dangerPanel.gameObject.SetActive(false);
+    }
+
     public void UpgradeSpd()
     {
         if ((int)(GameManager.instance.playerSpeed * 1000) < GameManager.instance.playerGold)
         {
-            GameManager.instance.playerSpeed += 0.03f;
             GameManager.instance.playerGold -= (int)(GameManager.instance.playerSpeed * 1000);
+            GameManager.instance.playerSpeed += 0.03f;
         }
         else
         {
-            return;
+            dangerPanel.gameObject.SetActive(true);
+            Invoke("DangerOff", 1f);
         }
     }
     public void UpgradeScore()
     {
         if (GameManager.instance.plusScore * 10 < GameManager.instance.playerGold)
         {
-            GameManager.instance.plusScore += 10;
             GameManager.instance.playerGold -= GameManager.instance.plusScore * 10;
+            GameManager.instance.plusScore += 10;   
         }
         else
         {
-            return;
+            dangerPanel.gameObject.SetActive(true);
+            Invoke("DangerOff", 1f);
         }
     }
     public void UpgradeGauge()
     {
         if ((int)(1000 / GameManager.instance.playerGauge) < GameManager.instance.playerGold)
         {
-            GameManager.instance.playerGauge -= 0.1f;
             GameManager.instance.playerGold -= (int)(1000 / GameManager.instance.playerGauge);
+            GameManager.instance.playerGauge -= 0.1f;
         }
         else
         {
-            return;
+            dangerPanel.gameObject.SetActive(true);
+            Invoke("DangerOff", 1f);
         }
     }
 }

@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetItem());
+        
     }
 
     void Update()
@@ -71,15 +72,21 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             hp--;
-            if(hp <= 0)
+            if (hp <= 0)
             {
-                if (GameManager.instance.maxScore < GameManager.instance.score) GameManager.instance.maxScore = GameManager.instance.score;
-                GameManager.instance.playerGold += GameManager.instance.score / 100;
-                GameManager.instance.score = 0;
-                SceneManager.LoadScene(2);
-                hp = 3;
+                Die();
             }
             collision.gameObject.BroadcastMessage("HitPlayer", 0, SendMessageOptions.RequireReceiver);
         }
+        else return;
+    }
+    
+    static public void Die()
+    {
+        if (GameManager.instance.maxScore < GameManager.instance.score) GameManager.instance.maxScore = GameManager.instance.score;
+        GameManager.instance.playerGold += GameManager.instance.score / 100;
+        GameManager.instance.score = 0;
+        SceneManager.LoadScene(2);
+        PlayerManager.instance.hp = 3;
     }
 }
