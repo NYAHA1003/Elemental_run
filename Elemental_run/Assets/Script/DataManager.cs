@@ -25,7 +25,7 @@ public class DataManager : MonoBehaviour
             Debug.Log("dd");   
             GameManager.instance.playerGold = 0;
             GameManager.instance.maxScore = 0;
-            GameManager.instance.playerSpeed = 0.1f;
+            GameManager.instance.playerSpeed = 20f;
             GameManager.instance.plusScore = 100;
             GameManager.instance.playerGauge = 10f;
             JsonSave();

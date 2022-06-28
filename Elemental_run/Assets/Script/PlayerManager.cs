@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -43,29 +44,6 @@ public class PlayerManager : MonoBehaviour
 
     public int hp = 3;
     public int currentItem = 0;
-    private float chargeGauge;
-
-    void Start()
-    {
-        StartCoroutine(GetItem());
-        
-    }
-
-    void Update()
-    {
-
-    }
-
-    IEnumerator GetItem()
-    {
-        chargeGauge = GameManager.instance.playerGauge;
-        while(true)
-        {
-            currentItem = Mathf.Clamp(currentItem, 0, 2);
-            yield return new WaitForSeconds(chargeGauge);
-            currentItem++;
-        }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

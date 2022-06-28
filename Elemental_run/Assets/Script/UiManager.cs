@@ -23,9 +23,9 @@ public class UiManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
-            spdCostText.text = $"{(int)(GameManager.instance.playerSpeed * 1000)} gold";
-            scoreCostText.text = $"{GameManager.instance.plusScore * 10} gold";
-            gaugeCostText.text = $"{(int)(1000 / GameManager.instance.playerGauge)} gold";
+            spdCostText.text = $"{(int)(GameManager.instance.playerSpeed * 10)} money";
+            scoreCostText.text = $"{GameManager.instance.plusScore * 10} money";
+            gaugeCostText.text = $"{(int)(1000 / GameManager.instance.playerGauge)} money";
         }
     }
 
@@ -55,10 +55,10 @@ public class UiManager : MonoBehaviour
 
     public void UpgradeSpd()
     {
-        if ((int)(GameManager.instance.playerSpeed * 1000) < GameManager.instance.playerGold)
+        if ((int)(GameManager.instance.playerSpeed * 10) < GameManager.instance.playerGold)
         {
-            GameManager.instance.playerGold -= (int)(GameManager.instance.playerSpeed * 1000);
-            GameManager.instance.playerSpeed += 0.03f;
+            GameManager.instance.playerGold -= (int)(GameManager.instance.playerSpeed * 10);
+            GameManager.instance.playerSpeed += 1f;
         }
         else
         {

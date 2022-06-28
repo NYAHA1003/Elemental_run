@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class GameManager : MonoBehaviour
     public int plusScore;
     public float playerGauge;
     public int score;
+
+    [SerializeField]
+    private GameObject tutorialBody;
+    [SerializeField]
+    private Image[] tutorial;
+    private int tutorialCnt = -1;
+    public static bool isTutorial = false;
 
     private void Awake()
     {
@@ -26,6 +34,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         string path = Path.Combine(Application.dataPath, "database.json");
+
+        if (isTutorial == false) tutorialBody.gameObject.SetActive(true);
     }
     public static GameManager instance
     {
@@ -36,6 +46,16 @@ public class GameManager : MonoBehaviour
                 return null;
             }
             return Instance;
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0) && isTutorial == false)
+        {
+            tutorialCnt++;
+            tutorial[tutorialCnt].gameObject.SetActive(false);
+            if (tutorialCnt >= 3) isTutorial = true;
         }
     }
 }

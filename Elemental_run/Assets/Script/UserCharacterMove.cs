@@ -75,17 +75,18 @@ public class UserCharacterMove : MonoBehaviour
 
     private void OnGUI()
     {
-        var labelStyle = new GUIStyle();
-        labelStyle.fontSize = 40;
-        labelStyle.normal.textColor = Color.black;
+        if(GameManager.isTutorial == true)
+        {
+            var labelStyle = new GUIStyle();
+            labelStyle.fontSize = 40;
+            labelStyle.normal.textColor = Color.black;
 
-        GUILayout.Label("플레이어 체력 : " + PlayerManager.Instance.hp.ToString(), labelStyle);
-        GUILayout.Label("플레이어 속도 : " + GameManager.instance.playerSpeed.ToString(), labelStyle);
-        GUILayout.Label("보유 아이템 : " + PlayerManager.Instance.currentItem.ToString(), labelStyle);
-        GUILayout.Label("현재 색 : " + UsingItemRay.rayColor, labelStyle);
-        GUILayout.Label("현재 점수 : " + GameManager.instance.score, labelStyle);
-        GUILayout.Label("최대 점수 : " + GameManager.instance.maxScore, labelStyle);
-        GUILayout.Label("보유 돈 : " + GameManager.instance.playerGold, labelStyle);
+            GUILayout.Label("플레이어 체력 : " + PlayerManager.Instance.hp.ToString(), labelStyle);
+            GUILayout.Label("플레이어 속도 : " + GameManager.instance.playerSpeed.ToString(), labelStyle);
+            GUILayout.Label("현재 점수 : " + GameManager.instance.score, labelStyle);
+            GUILayout.Label("최대 점수 : " + GameManager.instance.maxScore, labelStyle);
+            GUILayout.Label("보유 돈 : " + GameManager.instance.playerGold, labelStyle);
+        }
     }
 
     void Move()
@@ -95,11 +96,11 @@ public class UserCharacterMove : MonoBehaviour
         //키입력 
         float horizontal = Input.GetAxis("Horizontal");
 
-        //이동 + 이동 제한
-        if (transform.position.x >= 442) transform.position += new Vector3(-speed, 0, 0);
-        else if (transform.position.x <= 428) transform.position += new Vector3(speed, 0, 0);
-        transform.position += new Vector3(horizontal * speed, 0, 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, horizontal * 35, 0));
+        //이동 + 이동 제한
+        if (transform.position.x >= 442) transform.position = new Vector3(441.9f, transform.position.y, transform.position.z);
+        else if (transform.position.x <= 428) transform.position = new Vector3(428.1f, transform.position.y, transform.position.z);
+        transform.position += new Vector3(horizontal * speed * Time.deltaTime, 0, 0);
     }
     /// <summary>
     ///  애니메이션 재생시켜주는 함수
