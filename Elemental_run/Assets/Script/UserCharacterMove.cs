@@ -36,6 +36,8 @@ public class UserCharacterMove : MonoBehaviour
     public float jumpSpeed;
     public float jumpDuration;
 
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -161,6 +163,7 @@ public class UserCharacterMove : MonoBehaviour
             _isJumping = true;
             playerState = PlayerState.Jump;
             _posY = _transform.position.y;
+            SoundManager.instance.SFXPlay("Jump", clip);
         }
         if (_isJumping)
         {

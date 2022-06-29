@@ -1192,17 +1192,49 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6610858727071016894, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858727071016894, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
+    - target: {fileID: 6610858727071016894, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
       objectReference: {fileID: 689787288}
+    - target: {fileID: 6610858727231051348, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858727231051348, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
     - target: {fileID: 6610858727231051348, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
       objectReference: {fileID: 689787288}
     - target: {fileID: 6610858727280376832, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858727280376832, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
+    - target: {fileID: 6610858727280376832, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
       objectReference: {fileID: 689787288}
+    - target: {fileID: 6610858727352213810, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858727352213810, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
     - target: {fileID: 6610858727352213810, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
@@ -1212,13 +1244,37 @@ PrefabInstance:
       value: -5.38
       objectReference: {fileID: 0}
     - target: {fileID: 6610858728038569835, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858728038569835, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
+    - target: {fileID: 6610858728038569835, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
       objectReference: {fileID: 689787288}
     - target: {fileID: 6610858728100528300, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858728100528300, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
+    - target: {fileID: 6610858728100528300, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
       objectReference: {fileID: 689787288}
+    - target: {fileID: 6610858728123138771, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858728123138771, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
     - target: {fileID: 6610858728123138771, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
@@ -1227,6 +1283,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 6.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6610858728225245266, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858728225245266, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
     - target: {fileID: 6610858728225245266, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 
@@ -1239,6 +1303,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.58
       objectReference: {fileID: 0}
+    - target: {fileID: 6610858728930671778, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: exClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1cc68297faf86c45b04cf191d33971e, type: 3}
+    - target: {fileID: 6610858728930671778, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e3438cbf068cc1645a370ed0f690880b, type: 3}
     - target: {fileID: 6610858728930671778, guid: e8cb524986bd70640b7f01180748dd52, type: 3}
       propertyPath: hitImage
       value: 

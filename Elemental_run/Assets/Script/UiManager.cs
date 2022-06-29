@@ -13,11 +13,9 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI scoreCostText;
     public TextMeshProUGUI gaugeCostText;
     public GameObject dangerPanel;
+    public AudioClip clip;
 
-    void Start()
-    {
-        
-    }
+    DataManager dataManager;
 
     void Update()
     {
@@ -32,14 +30,17 @@ public class UiManager : MonoBehaviour
     public void ShopOn()
     {
         shopPanel.SetActive(true);
+        SoundManager.instance.SFXPlay("Button", clip);
     }
     public void ShopOff()
     {
         shopPanel.SetActive(false);
+        SoundManager.instance.SFXPlay("Button", clip);
     }
 
     public void StartGame()
     {
+        PlayerManager.Instance.currentItem = 0;
         SceneManager.LoadScene(1);
     }
 
@@ -65,6 +66,7 @@ public class UiManager : MonoBehaviour
             dangerPanel.gameObject.SetActive(true);
             Invoke("DangerOff", 1f);
         }
+        SoundManager.instance.SFXPlay("Button", clip);
     }
     public void UpgradeScore()
     {
@@ -78,6 +80,7 @@ public class UiManager : MonoBehaviour
             dangerPanel.gameObject.SetActive(true);
             Invoke("DangerOff", 1f);
         }
+        SoundManager.instance.SFXPlay("Button", clip);
     }
     public void UpgradeGauge()
     {
@@ -91,5 +94,12 @@ public class UiManager : MonoBehaviour
             dangerPanel.gameObject.SetActive(true);
             Invoke("DangerOff", 1f);
         }
+        SoundManager.instance.SFXPlay("Button", clip);
+    }
+
+    public void QuitApp()
+    {
+        SoundManager.instance.SFXPlay("Button", clip);
+        Application.Quit();
     }
 }

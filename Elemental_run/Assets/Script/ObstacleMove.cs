@@ -14,6 +14,8 @@ public class ObstacleMove : MonoBehaviour
     private float moveSpd;
     private MeshRenderer meshRen;
     public Image hitImage;
+    public AudioClip exClip;
+    public AudioClip hitClip;
 
     public void True()
     {
@@ -63,10 +65,12 @@ public class ObstacleMove : MonoBehaviour
     {
         if (itemNum != 0 && itemNum == obsNum)
         {
+            SoundManager.instance.SFXPlay("Explosion", exClip);
             SetProperty();
         }
         else if(itemNum == 0)
         {
+            SoundManager.instance.SFXPlay("Hit", hitClip);
             hitImage.gameObject.SetActive(true);
             Invoke("HitOff", 0.2f);
             SetProperty();  

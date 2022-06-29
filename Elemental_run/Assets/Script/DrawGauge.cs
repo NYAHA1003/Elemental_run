@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DrawGauge : MonoBehaviour
 {
     [SerializeField]
-    private Image[] currentItem;
+    public Image[] currentItem;
     private float chargeGauge;
     private float currentGauge = 0f;
     public Image gaugeImage;
@@ -19,10 +19,9 @@ public class DrawGauge : MonoBehaviour
     void Update()
     {
         GaugeDraw();
-
-
         ItemDraw();
     }
+
     IEnumerator GetItem()
     {
         chargeGauge = GameManager.instance.playerGauge;
@@ -57,10 +56,14 @@ public class DrawGauge : MonoBehaviour
                 break;
         }
     }
-    private void ItemDraw()
+    public void ItemDraw()
     {
         switch(PlayerManager.Instance.currentItem)
         {
+            case 0:currentItem[0].gameObject.SetActive(false);
+                currentItem[1].gameObject.SetActive(false);
+                currentItem[2].gameObject.SetActive(false);
+                break;
             case 1:currentItem[0].gameObject.SetActive(true);
                 currentItem[1].gameObject.SetActive(false);
                 currentItem[2].gameObject.SetActive(false);
@@ -72,8 +75,6 @@ public class DrawGauge : MonoBehaviour
             case 3:currentItem[0].gameObject.SetActive(true);
                 currentItem[1].gameObject.SetActive(true);
                 currentItem[2].gameObject.SetActive(true);
-                break;
-            default:
                 break;
         }
     }
