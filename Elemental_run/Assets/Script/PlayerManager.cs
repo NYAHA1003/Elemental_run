@@ -66,5 +66,6 @@ public class PlayerManager : MonoBehaviour
         GameManager.instance.score = 0;
         SceneManager.LoadScene(2);
         PlayerManager.instance.hp = 3;
+        PlayerManager.instance.currentItem = 0;
     }
 }

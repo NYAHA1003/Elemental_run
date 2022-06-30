@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 4b80b033eedd36347b91d2cd98b8bda6, type: 2}
-  audioSlider: {fileID: 1580264085}
 --- !u!4 &307435887
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +257,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3263,8 +3262,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307435886}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 2103952562}
+        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
         m_MethodName: AudioControl
         m_Mode: 1
         m_Arguments:
@@ -4640,6 +4639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2103952561}
   - component: {fileID: 2103952560}
+  - component: {fileID: 2103952562}
   m_Layer: 0
   m_Name: UiManager
   m_TagString: Untagged
@@ -4679,6 +4679,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103952562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103952559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb0df624efa1dc42b9a0f9539760580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 4b80b033eedd36347b91d2cd98b8bda6, type: 2}
+  audioSlider: {fileID: 1580264085}
 --- !u!1 &2120609622
 GameObject:
   m_ObjectHideFlags: 0

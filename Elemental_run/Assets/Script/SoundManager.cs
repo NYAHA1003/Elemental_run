@@ -8,8 +8,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     public AudioMixer masterMixer;
-    public Slider audioSlider;
-    private float sound;
 
     private void Awake()
     {
@@ -24,11 +22,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        sound = audioSlider.value;
-    }
-
     public void SFXPlay(string sfxName, AudioClip clip)
     {
         GameObject go = new GameObject(sfxName + "Sound");
@@ -39,11 +32,5 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
 
         Destroy(go, clip.length + 0.1f);
-    }
-
-    public void AudioControl()
-    {
-        if (sound == -40f) masterMixer.SetFloat("Master", -80);
-        else masterMixer.SetFloat("Master", sound);
     }
 }

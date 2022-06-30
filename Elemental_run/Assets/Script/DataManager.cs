@@ -5,8 +5,21 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
+    private static DataManager Instance;
     string path;
 
+    private void Awake()
+    {
+        if (null == Instance)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     void Start()
     {   
         path = Path.Combine(Application.dataPath + "/Data/", "database.json");
